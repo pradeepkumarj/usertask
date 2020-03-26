@@ -1,0 +1,16 @@
+<div *ngIf="(data?.type==='Logout') || (data?.type==='Delete')">
+  <div class="row">
+    <div class="col-2">
+      <img src="../../assets/images/alert.jpg" style="height:50px; width:50px">
+    </div>
+    <div class="col-10">
+      <h5 style="color:green;text-align: center">Logout</h5>
+      <div>&nbsp;</div>
+    </div>
+  </div>
+  <h6>Are you sure you want to {{data?.type}}? </h6>
+  <div style="text-align: right;">
+    <button mat-flat-button color="warn" type="button" (click)="onNoClick()">no</button>&nbsp;&nbsp;
+    <button mat-flat-button color="primary" type="button" (click)="onYesClick()">yes</button>
+  </div>
+</div>

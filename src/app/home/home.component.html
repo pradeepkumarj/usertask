@@ -1,0 +1,65 @@
+<div class="side-nav sn-bg-4 mdb-sidenav fixed" style="outline: none;">
+  <section>
+    <div class='bodys'>
+      <nav class='navbar navbar-dark fixed-top default-color justify-content-between bg-dark  navbar-expand-sm bg-light'
+        style="z-index: 1;">
+        <div class='row col-12 position '>
+          <div class='col-6 '>
+            <img class="navImage" src="../../assets/images/tasks_image.jpg" />
+          </div>
+          <div class='col-6'>
+            <ul class='navbar-nav ml-auto mr-0 mr-md-3 my-2 my-md-0' style='float: right'>
+              <li class='nav-item mx-1'>
+                <img src="../../assets/images/profile_image.png" [matMenuTriggerFor]="menu"
+                  style="cursor: pointer;height: 40px;border-radius: 50%;" />
+                <mat-menu #menu="matMenu">
+
+                  <div mat-menu-item disabled style="font-size:15px;">
+                    <mat-icon>perm_identity</mat-icon>
+                    <mat-label>Name:&nbsp;&nbsp;</mat-label>
+                    <span><b style="color: #677cf1;">{{currentUserData?.userName}}</b></span>
+                  </div>
+
+                  <div mat-menu-item (click)='logOut()' style="cursor: pointer; outline: none;">
+                    <mat-icon>input</mat-icon>
+                    <span style="color: red;">Logout</span>
+                  </div>
+
+                </mat-menu>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <div class="bodys">
+      <div id='wrapper'>
+        <ul class='sidebar navbar-nav ' style='height: auto; position: relative;overflow: auto;'>
+          <li class='nav-item dropdown'>
+            <div>
+              <div class='list-group panel'>
+
+                <div *ngFor="let i of menuItems" class='list-group'>
+                  <a routerLink='/home/{{i?.link}}' class='list-group-item' [routerLinkActive]="['active']">
+                    {{i.description}}
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </li>
+        </ul>
+        <div id='content-wrapper'>
+          <div class='container-fluid'>
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+      <a class='scroll-to-top rounded' href='#page-top'>
+        <i class='fas fa-angle-up'></i>
+      </a>
+    </div>
+
+  </section>
+</div>

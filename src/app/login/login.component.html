@@ -1,0 +1,60 @@
+<mat-card class="container" style="box-shadow: none;border-radius: 0;">
+  <div class=" login container">
+    <div>
+      <div class="row mainbgm-desg">
+        <div class="bglogin">
+          <div class="d-flex">
+            <div class="col-sm-12 col-md-6 col-lg-6 fx-login-path">
+              <div class="yellow-bg">
+                <img src="assets/login-path.png" class="img-fluid" alt="">
+              </div>
+            </div>
+            <!-- ================ Login Form ===================== -->
+            <div class="col-sm-12 col-md-6 col-lg-6 fx-box">
+              <form #loginForm="ngForm" name="loginForm">
+                <p>Login</p>
+
+                <!-- ------------ User mail field ----------------- -->
+                <div>
+                  <mat-form-field>
+                    <mat-label>Enter Your Mail</mat-label>
+                    <input matInput type="text" autocomplete="off" [(ngModel)]="usrid" name="usrid"
+                      #usridControl="ngModel" required>
+                    <mat-error
+                      *ngIf="usridControl.invalid && (usridControl.dirty||usridControl.touched)||formSubmitted && usridControl.errors">
+                      <mat-error *ngIf="usridControl.errors.required">User Mail is required</mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+
+                <!-- ------------ Passowrd Field ------------ -->
+                <div>
+                  <mat-form-field>
+                    <mat-label>Enter Your Pasword</mat-label>
+                    <input matInput type="password" autocomplete="off" [(ngModel)]="password" name="password" required
+                      #passwordControl="ngModel">
+                    <mat-error
+                      *ngIf="passwordControl.invalid && (passwordControl.dirty||passwordControl.touched)||formSubmitted && passwordControl.errors">
+                      <mat-error *ngIf="passwordControl.errors.required"> Password is required </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <div class="col-4"> </div>
+                  <div class="col">
+                    <button mat-raised-button type="button" (click)="navigateToSignUp()" class="btn btn-outline-success"
+                      style="outline:none;">Sign Up</button>
+                    <button mat-raised-button color="primary" type="submit" (click)="logIn(loginForm)"
+                      class="btn btn-outline-primary" style="outline:none;">Login</button>
+                  </div>
+                </div>
+              </form>
+              <p *ngIf="error" class="text-danger"><b>{{error}}</b></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,102 @@
+<div class="card" *ngIf="(type==='Create Task') || (type==='Edit Task')">
+  <h5 class="card-header" id="header">
+    {{type}}
+  </h5>
+  <form #taskForm="ngForm" name="taskForm" style="text-align: center;">
+    <!-- -------------- Task Name -------------- -->
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>Task Name</mat-label>
+        <input matInput type="text" autocomplete="off" name="taskName" [(ngModel)]="taskObj.taskName" #taskNameControl="ngModel"
+          required [readonly]="type==='Edit Task'">
+        <mat-error
+          *ngIf="taskNameControl.invalid && (taskNameControl.dirty||taskNameControl.touched)||formSubmitted && taskNameControl.errors">
+          <mat-error *ngIf="taskNameControl.errors.required">Task Name is required</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- ---------------- Expiry date -------------- -->
+    <div class="row">
+      <mat-form-field class="col-6">
+        <mat-label>Expiry date</mat-label>
+        <input matInput readonly (keypress)="false" autocomplete="off" [matDatepicker]="picker" [min]="todayDate"
+          (click)="picker.open()" name="expires_At" [(ngModel)]="taskObj.expires_At" #expires_AtControl="ngModel">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+
+        <mat-error
+          *ngIf="expires_AtControl.invalid && (expires_AtControl.dirty||expires_AtControl.touched)||formSubmitted && expires_AtControl.errors">
+          <mat-error *ngIf="expires_AtControl.errors.required">Expiry Date is required</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- ----------------------- Status of Task ----------------------- -->
+    <div class="row" *ngIf="type==='Edit Task'">
+      <mat-form-field class="col-6">
+        <mat-label>Status</mat-label>
+        <mat-select matInput name="status" disableOptionCentering [(ngModel)]="taskObj.status" #statusControl="ngModel"
+          required>
+          <mat-option value="Completed">Completed</mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="statusControl.invalid && (statusControl.dirty||statusControl.touched)||formSubmitted && statusControl.errors">
+          <mat-error *ngIf="statusControl.errors.required">Status is required</mat-error>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" (click)="addOrEditTask(taskForm,type)"
+      class="btn btn-outline-primary" style="outline:none;">{{type}}</button>
+    <button mat-raised-button type="button" (click)="cancelForm(taskForm)" class="btn btn-outline-danger"
+      style="outline:none;">Cancel</button>
+
+  </form>
+</div>
+
+
+<!-- ========================== show tasks list ============================ -->
+
+<div class="card" *ngIf="type==='showTaskList'">
+  <h5 class="card-header" id="header">
+    Tasks List
+  </h5>
+
+  <br>
+  <div class="row">
+    <div class="col-3">
+      <button mat-raised-button color="primary" type="button" (click)="type='Create Task'"
+      class="btn btn-outline-primary" style="outline:none;text-align: center;">Create Task</button>
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table" fixed-header>
+    <thead style="background-color: darkslategray;color: white;">
+      <th>S.No</th>
+      <th>Task</th>
+      <th>Expiry Date</th>
+      <th>Status</th>
+      <th style="width:10%">Options</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let i of taskList;let index = index">
+        <td>{{index+1}}</td>
+        <td>{{i?.taskName}}</td>
+        <td>{{i?.expires_At | date}}</td>
+        <td>{{i?.status}}</td>
+        <td style="cursor: pointer;width:10%">
+          <span class="material-icons" style='cursor:pointer' (click)='editDetails(i)'>
+            edit
+          </span>
+          <span class="material-icons" style='cursor:pointer' (click)='deleteTask(i)'>
+            delete
+          </span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

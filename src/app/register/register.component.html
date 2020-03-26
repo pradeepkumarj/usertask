@@ -1,0 +1,58 @@
+<mat-card class="container" style="box-shadow: none;border-radius: 0;">
+  <div class=" login container">
+    <div>
+      <div class="row mainbgm-desg">
+        <div class="bglogin">
+          <div class="d-flex">
+            <div class="col-sm-12 col-md-6 col-lg-6 fx-login-path">
+              <div class="yellow-bg">
+                <img src="assets/login-path.png" class="img-fluid" alt="">
+              </div>
+            </div>
+            <!-- ===================== sign up form ======================= -->
+            <div class="col-sm-12 col-md-6 col-lg-6 fx-box">
+              <form #registerForm="ngForm" name="registerForm">
+                <p>Registration</p>
+
+                <!-- ------------ User Name field ----------------- -->
+                <div>
+                  <mat-form-field>
+                    <mat-label>User Id</mat-label>
+                    <input matInput type="text" autocomplete="off" [(ngModel)]="userName" name="userName"
+                      #userNameControl="ngModel" required>
+                    <mat-error
+                      *ngIf="userNameControl.invalid && (userNameControl.dirty||userNameControl.touched)||formSubmitted && userNameControl.errors">
+                      <mat-error *ngIf="userNameControl.errors.required">User Name is required</mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <!-- ------------ Passowrd Field ------------ -->
+                <div>
+                  <mat-form-field>
+                    <mat-label>Enter Your Pasword</mat-label>
+                    <input matInput type="password" autocomplete="off" [(ngModel)]="password"
+                      name="password" required #passwordControl="ngModel">
+                    <mat-error
+                      *ngIf="passwordControl.invalid && (passwordControl.dirty||passwordControl.touched)||formSubmitted && passwordControl.errors">
+                      <mat-error *ngIf="passwordControl.errors.required"> Password is required </mat-error>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+
+                <div class="row">
+                  <div class="col-4"> </div>
+                  <div class="col">
+                    <button mat-raised-button color="primary" type="submit" (click)="registerUser(registerForm)"
+                      class="btn btn-outline-primary" style="outline:none;">SignUp & Login</button>
+                    <button mat-raised-button type="button" (click)="navigateToLogin()" class="btn btn-outline-danger"
+                      style="outline:none;">Cancel</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
