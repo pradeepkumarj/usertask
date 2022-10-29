@@ -29,8 +29,8 @@
     "passport-twitter": "latest",
     "pdf-creator-node": "^1.4.0",
     "phantomjs-prebuilt": "^2.1.13",
-    "socket.io": "^1.0.6",
-    "socket.io-client": "^1.0.6",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
     "socketio-jwt": "^3.0.0"
   },
   "devDependencies": {
